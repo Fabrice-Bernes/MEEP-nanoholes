@@ -9,6 +9,10 @@
 
 (define GlassDpt 2)
 
+(define SrcDist 2.8)
+(define SrcTheta 30) ; Angle is given in degrees to be converted to radian
+(set! SrcTheta (* (/ pi 180) SrcTheta))
+
 
 (set! geometry-lattice (make lattice (size (+ TotalLen 1) 8 no-size)))  ; Sim space
 
@@ -34,3 +38,15 @@
 
 
 (set! pml-layers (list (make pml (thickness 1.0))))
+
+
+(set! sources (list
+               (make source
+                 (src (make continuous-src (frequency 0.15)))
+                 (component Ez)
+                 (center 0 (* -1 SrcDist)))
+               (make source
+                 (src (make continuous-src (frequency 0.85)))
+                 (component Ez)
+                 (center (* SrcDist (sin SrcTheta)) (* -1 (* SrcDist (cos SrcTheta)))))
+))
