@@ -1,16 +1,16 @@
 (set! resolution 45)
 
 
-(define HoleQty 8)
-(define HoleSep 1)
-(define HoleWid 0.2)
+(define HoleQty 50)
+(define HoleSep 0.3)
+(define HoleWid 0.1)
 (define HoleDpt 0.1)
 (define TotalLen ( - (* (+ HoleQty 1) HoleSep) HoleWid))
 
 (define GlassDpt 2)
 
 (define SrcDist 2.8)
-(define SrcTheta 70) ; Angle is given in degrees to be converted to radian
+(define SrcTheta 45) ; Angle is given in degrees to be converted to radian
 (set! SrcTheta (* (/ pi 180) SrcTheta))
 
 
