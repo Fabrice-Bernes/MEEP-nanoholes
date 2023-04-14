@@ -7,9 +7,18 @@
 (define HoleDpt 0.3)
 (define TotalLen ( - (* (+ HoleQty 1) HoleSep) HoleWid))
 
+(define GlassDpt 2)
+
 
 (set! geometry-lattice (make lattice (size (+ TotalLen 1) 8 no-size)))  ; Sim space
 
+
+(set! geometry (list
+    (make block
+    (material BK7)
+    (size infinity GlassDpt infinity )
+    (center 0 (* -1 (/ (+ HoleDpt GlassDpt) 2))))
+    ))
 
 (set! geometry(
     append geometry (
