@@ -17,9 +17,15 @@
 (set! geometry-lattice (make lattice (size TotalLen 8 no-size)))  ; Sim space
 
 
+; Define materials that will make a nice contour overlay when we plot dielectric function
+
+(define mat1 (make medium (epsilon 12))) ; Will be replaced with BK7
+(define mat2 (make medium (epsilon 50)))  ; Will be replaced with Au
+
+
 (set! geometry (list
     (make block
-    (material BK7)
+    (material mat1)
     (size infinity GlassDpt infinity )
     (center 0 (* -1 (/ (+ HoleDpt GlassDpt) 2))))
     ))
@@ -28,7 +34,34 @@
     append geometry (
     map ( lambda (n) (
     make block
-    (material Au)
+    (material mat2)
+    (size (- HoleSep HoleWid) HoleDpt infinity)
+    (center  (- (* n HoleSep) (/ TotalLen 2)) 0))) 
+    (arith-sequence 0 1 (+ HoleQty 1))
+        )
+    )
+)
+
+(init-fields)
+(output-epsilon)
+(reset-meep)
+
+(set! mat1 BK7)
+(set! mat2 Au)
+
+(set! geometry-lattice (make lattice (size TotalLen 8 no-size)))  ; Sim space
+(set! geometry (list
+    (make block
+    (material mat1)
+    (size infinity GlassDpt infinity )
+    (center 0 (* -1 (/ (+ HoleDpt GlassDpt) 2))))
+    ))
+
+(set! geometry(
+    append geometry (
+    map ( lambda (n) (
+    make block
+    (material mat2)
     (size (- HoleSep HoleWid) HoleDpt infinity)
     (center  (- (* n HoleSep) (/ TotalLen 2)) 0))) 
     (arith-sequence 0 1 (+ HoleQty 1))
@@ -51,4 +84,4 @@
                  (center (* SrcDist (sin SrcTheta)) (* -1 (* SrcDist (cos SrcTheta)))))
 ))
 
-(run-until 100 (at-every 0.2 (output-png Ez "-S 3 -Zc dkbluered")))
+(run-until 20 (to-appended "ez" (at-every 0.2 output-efield-z)))
