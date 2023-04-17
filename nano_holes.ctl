@@ -22,6 +22,10 @@
 (define mat1 (make medium (epsilon 12))) ; Will be replaced with BK7
 (define mat2 (make medium (epsilon 50)))  ; Will be replaced with Au
 
+; This is so far unused and hardcoded,
+; but user should be able to define planes like this,
+; in wich poynting vector flux will be integrated with time to get irradiance
+(define sensorTest (volume (center 0 2 0) (size 1 1 infinity) (e1 1 1 0) (e2 -1 1 0) (e3 0 0 1)))
 
 (set! geometry (list
     (make block
@@ -84,4 +88,6 @@
                  (center (* SrcDist (sin SrcTheta)) (* -1 (* SrcDist (cos SrcTheta)))))
 ))
 
-(run-until 20 (to-appended "ez" (at-every 0.2 output-efield-z)))
+(run-until 20
+    (to-appended "ez" (at-every 0.2 output-efield-z))
+    (to-appended "S-vec" (at-every 0.2 synchronized-magnetic output-poynting)))
