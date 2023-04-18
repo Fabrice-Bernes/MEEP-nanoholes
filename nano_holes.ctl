@@ -1,16 +1,19 @@
+(use-output-directory)
+
 (set! resolution 45)
+(define port (open-input-file ".SimParams")) (define SimParams (read port)) (close-input-port port)
 
 
-(define HoleQty 50)
-(define HoleSep 0.3)
-(define HoleWid 0.1)
-(define HoleDpt 0.1)
+(define HoleQty (list-ref SimParams 0))
+(define HoleSep (list-ref SimParams 1))
+(define HoleWid (list-ref SimParams 2))
+(define HoleDpt (list-ref SimParams 3))
 (define TotalLen ( - (* (+ HoleQty 1) HoleSep) HoleWid))
 
-(define GlassDpt 2)
+(define GlassDpt (list-ref SimParams 4))
 
-(define SrcDist 2.8)
-(define SrcTheta 45) ; Angle is given in degrees to be converted to radian
+(define SrcDist (list-ref SimParams 5))
+(define SrcTheta (list-ref SimParams 6)) ; Angle is given in degrees to be converted to radian
 (set! SrcTheta (* (/ pi 180) SrcTheta))
 
 
