@@ -3,7 +3,7 @@
 Simulate arrays of nanoholes in a metal sheet for SPP excitation with
 [MEEP](https://github.com/NanoComp/meep)
 
-![Example](/home/fab/Trabajo/FEM/espacio_limpio/github_repo/MEEP-nanoholes/figures/demo.gif)
+![Example](https://github.com/Fabrice-Bernes/MEEP-nanoholes/blob/main/figures/demo.gif)
 
 
 ## Usage
@@ -13,4 +13,4 @@ Results will be in `~/path/to/MEEP-NanoHoles/simulations/My-simulations`
 
 User can set parameters for different geometries and sources features. See diagram below:
 
-![System geometry](/home/fab/Trabajo/FEM/espacio_limpio/github_repo/MEEP-nanoholes/figures/drawing.svg)
+![System geometry](https://github.com/Fabrice-Bernes/MEEP-nanoholes/blob/main/figures/drawing.svg)
